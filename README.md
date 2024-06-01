@@ -10,7 +10,16 @@
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
 
 # 📊 GitHub Stats:
-![](https://github-readme-stats.vercel.app/api?username=mayras22&theme=dark&hide_border=false&include_all_commits=true&count_private=true)<br/>
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=mayras22&theme=light&hide_border=false&include_all_commits=true&count_private=true&bg_color=ADD8E6"/>
+</p>
+
+
+<div align="center">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=mayras22&bg_color=ADD8E6&title_color=000000&text_color=000000" alt="[mayras22]'s GitHub Stats"/>
+</div>
+
+
 
 
 ## 🏆 GitHub Trophies
