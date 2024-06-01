@@ -1,8 +1,6 @@
 ## Hi there 👋 I'm Mayra!
 
-## Hello World, I'm a recent Electrical and Computer Engineering Master's graduate from Boston University! 🎓<br><br>- 🎓 Equipped with a rich blend of coursework in **Embedded Systems, FPGA, Digital Signal Processing, and Photonics**.<br>- 🔧 Passionate about hardware design.<br>- 💡 Recently Developed a Hardware password management system and replicated the Enigma machine on FPGA.<br>- 🌟 Passionate about innovation and eager to contribute to cutting-edge technology projects.<br><br> Excited to collaborate and make an impact in the tech world!
-
-
+### Hello World, I'm a recent Electrical and Computer Engineering Master's graduate from Boston University! <br><br>- 🎓 Equipped with a rich blend of coursework in **Embedded Systems, FPGA, Digital Signal Processing, and Photonics**.<br>- 🔧 Passionate about hardware design.<br>- 💡 Recently Developed and finished a project on a Hardware password management system.<br>- 🌟 Passionate about innovation and eager to contribute to cutting-edge technology projects.<br>
 ## 🌐 Socials:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mayra-teixeira-b9a324179/) 
 
@@ -20,9 +18,6 @@
 
 ### ✍️ Random Dev Quote
 ![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
-
-### 😂 Random Dev Meme
-<img src='https://memer-new.vercel.app/' style="height: 400px;"/>
 
 ---
 [![](https://visitcount.itsvg.in/api?id=mayras22&icon=0&color=3)](https://visitcount.itsvg.in)
