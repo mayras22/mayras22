@@ -1,10 +1,35 @@
-## Hi there 👋 I'm Mayra!
+<div id="header" align="center"><div id="header" align="center">
+  <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2ZqM2N2MjRjcnptZ2NhcWRkYjE5ZXhqbjZ5Zmk2b3dvY3J1NXF5eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Fgvl4kpB8mTRLmciii/giphy.gif" width="200"/>
+</div>
 
-### Hello World, I'm a recent Electrical and Computer Engineering Master's graduate from Boston University! <br><br>- 🎓 Equipped with a rich blend of coursework in **Embedded Systems, FPGA, Digital Signal Processing, and Photonics**.<br>- 🔧 Passionate about hardware design.<br>- 💡 Recently Developed and finished a project on a Hardware password management system.<br>- 🌟 Passionate about innovation and eager to contribute to cutting-edge technology projects.<br>
-## 🌐 Socials:
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mayra-teixeira-b9a324179/) 
+<div id="badges" align="center">
+  <a href="https://www.linkedin.com/in/mayra-teixeira-b9a324179/) ">
+    <img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge"/>
+  </a>
+</div>
 
-# 💻 Tech Stack:
+<div style="text-align: center;">
+  <h1>
+    hey there
+    <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="30px"/>
+    I'm Mayra!
+  </h1>
+</div>
+
+## :woman_technologist: About Me :
+
+I'm a recent Electrical and Computer Engineering Master's graduate from Boston University!</br>
+🎓 Equipped with a rich blend of coursework in Embedded Systems, FPGA, Digital Signal Processing, and Photonics</br>
+🌟 Passionate about hardware design. </br>
+💡 Recently Developed and finished a project on a Hardware password management system. </br>
+🌟 Passionate about innovation and eager to contribute to cutting-edge technology projects. </br>
+🌐 How to reach me: [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mayra-teixeira-b9a324179/) </br>
+
+
+---
+
+### :hammer_and_wrench: Languages and Tools :
+
 ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white) ![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white) ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)  
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
@@ -13,13 +38,6 @@
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=mayras22&theme=light&hide_border=false&include_all_commits=true&count_private=true&bg_color=ADD8E6"/>
 </p>
-
-
-<div align="center">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=mayras22&bg_color=ADD8E6&title_color=000000&text_color=000000" alt="[mayras22]'s GitHub Stats"/>
-</div>
-
-
 
 
 ## 🏆 GitHub Trophies
