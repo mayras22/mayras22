@@ -20,7 +20,7 @@
 
 <br>I'm a recent Electrical and Computer Engineering Master's graduate from Boston University!</br>
   💡 Recently Developed and finished a project on a Hardware password management system.
-  <br>🌟 Passionate about hardware design, Electronics, schematics, circuit design, and embedded systems</br>
+  <br>🌟 Passionate about software engineering, hardware design, Electronics, circuit design, and embedded systems</br>
   🌟 Passionate about innovation and eager to contribute to cutting-edge technology projects.
   </br>🌐 How to reach me: [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mayra-teixeira-b9a324179/) </br>
 
