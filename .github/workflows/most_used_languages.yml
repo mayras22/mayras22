@@ -1,7 +1,7 @@
 name: Update Languages
 on:
   schedule:
-    - cron: '0 0 * * 0' # Runs every Friday
+    - cron: '0 0 * * 0' # Runs every Sunday
   workflow_dispatch: # Allows manual triggering
 
 jobs:
@@ -19,55 +19,16 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Fetch and Generate Language Data
+      - name: Run languages script
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LANGUAGES_USED: ${{ secrets.LANGUAGES_USED }}
         run: |
-          python - <<EOF
-          import requests
-          import os
+          python languages_script.py
 
-          def get_languages(token):
-              url = "https://api.github.com/user/repos"
-              headers = {"Authorization": f"token {token}"}
-              languages = {}
-
-              page = 1
-              while True:
-                  response = requests.get(url, headers=headers, params={"per_page": 100, "page": page})
-                  if response.status_code != 200:
-                      print(f"Error: {response.status_code}, {response.text}")
-                      return
-
-                  repos = response.json()
-                  if not repos:
-                      break
-
-                  for repo in repos:
-                      lang_url = repo["languages_url"]
-                      lang_response = requests.get(lang_url, headers=headers)
-                      if lang_response.status_code != 200:
-                          print(f"Error retrieving languages for {repo['name']}")
-                          continue
-
-                      repo_languages = lang_response.json()
-                      for lang, count in repo_languages.items():
-                          languages[lang] = languages.get(lang, 0) + count
-
-                  page += 1
-
-              sorted_languages = dict(sorted(languages.items(), key=lambda item: item[1], reverse=True))
-              return sorted_languages
-
-          token = os.getenv("LANGUAGES_USED")
-          languages = get_languages(token)
-
-          with open("languages.md", "w") as f:
-              if languages:
-                  f.write("# Languages Used in Repositories\n\n")
-                  for lang, count in languages.items():
-                      f.write(f"- {lang}: {count} bytes\n")
-          EOF
+      - name: Configure Git Identity
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
 
       - name: Update README
         run: cp languages.md README.md && git add README.md && git commit -m "Update languages" && git push
