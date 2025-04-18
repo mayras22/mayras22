@@ -20,17 +20,23 @@ jobs:
           curl -H "Authorization: token ${{ secrets.SECRET_NAME }}" \
           https://api.github.com/user/repos?visibility=all&per_page=100 > repos.json
 
+      - name: Debug repos.json
+        run: cat repos.json
+
       - name: Analyze languages
         run: |
           # Ensure the file exists and is empty before appending
           > languages.json
           jq -r '.[] | .languages_url' repos.json | while read url; do
-            curl -H "Authorization: token ${{ secrets.SECRET_NAME }}" $url >> languages.json || echo "Failed to fetch: $url" >> error.log
+            if ! curl -H "Authorization: token ${{ secrets.SECRET_NAME }}" $url >> languages.json; then
+              echo "Failed to fetch: $url" >> error.log
+            fi
           done
 
           # Check if the file is not empty
           if [ ! -s languages.json ]; then
             echo "Error: languages.json is empty. The fetch step failed."
+            echo "Check error.log for details."
             exit 1
           fi
 
