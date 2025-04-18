@@ -1,7 +1,12 @@
 import requests
 import os
+import sys
 
 def get_languages(token):
+    if not token:
+        print("Error: LANGUAGES_USED environment variable is not set.")
+        sys.exit(1)
+
     url = "https://api.github.com/user/repos"
     headers = {"Authorization": f"token {token}"}
     languages = {}
@@ -11,7 +16,7 @@ def get_languages(token):
         response = requests.get(url, headers=headers, params={"per_page": 100, "page": page})
         if response.status_code != 200:
             print(f"Error: {response.status_code}, {response.text}")
-            return
+            sys.exit(1)
 
         repos = response.json()
         if not repos:
@@ -33,11 +38,12 @@ def get_languages(token):
     sorted_languages = dict(sorted(languages.items(), key=lambda item: item[1], reverse=True))
     return sorted_languages
 
-token = os.getenv("LANGUAGES_USED")  # Retrieve token from environment variable
-languages = get_languages(token)
+if __name__ == "__main__":
+    token = os.getenv("LANGUAGES_USED")  # Retrieve token from environment variable
+    languages = get_languages(token)
 
-if languages:
-    with open("languages.md", "w") as f:
-        f.write("# Languages Used in Repositories\n\n")
-        for lang, count in languages.items():
-            f.write(f"- {lang}: {count} bytes\n")
+    if languages:
+        with open("languages.md", "w") as f:
+            f.write("# Languages Used in Repositories\n\n")
+            for lang, count in languages.items():
+                f.write(f"- {lang}: {count} bytes\n")
