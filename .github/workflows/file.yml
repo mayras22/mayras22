@@ -1,0 +1,35 @@
+name: Most Used Languages
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  analyze-languages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+
+      - name: Fetch repositories
+        run: |
+          curl -H "Authorization: token ${{ secrets.SECRET_NAME }}" \
+          https://api.github.com/user/repos?visibility=all&per_page=100 > repos.json
+
+      - name: Analyze languages
+        run: |
+          jq -r '.[] | .languages_url' repos.json | while read url; do
+            curl -H "Authorization: token ${{ secrets.SECRET_NAME }}" $url >> languages.json
+          done
+
+      - name: Generate language stats
+        run: |
+          jq -s 'reduce .[] as $item ({}; . + $item)' languages.json > combined_languages.json
+          jq -r 'to_entries | sort_by(.value) | reverse | .[] | "\(.key): \(.value)"' combined_languages.json > language_stats.txt
+
+      - name: Display language stats
+        run: cat language_stats.txt
