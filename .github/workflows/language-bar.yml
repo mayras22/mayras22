@@ -1,0 +1,45 @@
+name: Update Language Usage in README
+
+on:
+  schedule:
+    - cron: "0 0 * * 1"  # Runs every Monday
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install requests matplotlib
+
+      - name: Fetch language usage
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
+        run: python language_used.py
+
+      - name: Generate language usage graph
+        run: python generate_chart.py
+
+      - name: Update README
+        run: |
+          # Add the graph to the README
+          echo "### Language Usage" > temp_readme.md
+          echo "![Language Usage](language_usage_chart.png)" >> temp_readme.md
+          cat README.md >> temp_readme.md
+          mv temp_readme.md README.md
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+          git add README.md language_usage_chart.png
+          git commit -m "Update language usage graph in README"
+          git push
