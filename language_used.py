@@ -11,9 +11,9 @@ headers = {
     "Authorization": f"token {GITHUB_TOKEN}"
 }
 
-# Fetch all repositories
+# Fetch all repositories (including private and forked)
 def get_repositories():
-    url = f"https://api.github.com/users/{USERNAME}/repos"
+    url = f"https://api.github.com/user/repos?per_page=100&type=all"
     response = requests.get(url, headers=headers)
     response.raise_for_status()
     return response.json()
@@ -31,7 +31,8 @@ def aggregate_languages():
     language_totals = {}
 
     for repo in repos:
-        languages = get_languages(repo["name"])
+        repo_name = repo["name"]
+        languages = get_languages(repo_name)
         for lang, bytes_used in languages.items():
             language_totals[lang] = language_totals.get(lang, 0) + bytes_used
 
