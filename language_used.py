@@ -3,7 +3,7 @@ import os
 import json
 
 # GitHub API token and username
-GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]  # Read the token from the environment variable
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")  # Read the token from the environment variable
 USERNAME = "mayras22"
 
 # Headers for authentication
@@ -20,8 +20,12 @@ def get_repositories():
 
 # Fetch language data for a repository
 def get_languages(repo_name):
-    url = f"https://api.github.com/repos/{USERNAME}/{repo_name}/languages"
+    repo_name_encoded = repo_name.replace(" ", "%20")  # Encode spaces in the repository name
+    url = f"https://api.github.com/repos/{USERNAME}/{repo_name_encoded}/languages"
+    print(f"Fetching languages for repository: {repo_name} (URL: {url})")  # Debugging
     response = requests.get(url, headers=headers)
+    if response.status_code == 404:
+        print(f"Repository not found: {repo_name}")
     response.raise_for_status()
     return response.json()
 
@@ -32,9 +36,13 @@ def aggregate_languages():
 
     for repo in repos:
         repo_name = repo["name"]
-        languages = get_languages(repo_name)
-        for lang, bytes_used in languages.items():
-            language_totals[lang] = language_totals.get(lang, 0) + bytes_used
+        try:
+            languages = get_languages(repo_name)
+            for lang, bytes_used in languages.items():
+                language_totals[lang] = language_totals.get(lang, 0) + bytes_used
+        except requests.exceptions.HTTPError as e:
+            print(f"Error fetching languages for {repo_name}: {e}")  # Log the error and continue
+            continue
 
     return language_totals
 
@@ -51,6 +59,12 @@ def save_to_file(data, filename="language_data.json"):
 # Main function
 if __name__ == "__main__":
     language_totals = aggregate_languages()
+    #print("Aggregated Language Data:", language_totals)  # Print aggregated data for debugging
+
     percentages = calculate_percentages(language_totals)
+    #print("Language Usage Percentages:")  # Print percentages for debugging
+    #for lang, percent in percentages.items():
+        #print(f"{lang}: {percent:.2f}%")
+
     save_to_file(percentages)
     print("Language usage data saved to language_data.json")
