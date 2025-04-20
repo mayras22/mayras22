@@ -18,7 +18,7 @@ jobs:
           python-version: "3.x"
 
       - name: Install dependencies
-        run: pip install requests matplotlib
+        run: pip install requests matplotlib seaborn
 
       - name: Fetch language usage
         env:
