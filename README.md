@@ -33,9 +33,6 @@
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)  ![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
 
 
-### Language Usage
-
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=mayras22&layout=compact&hide=html&langs_count=10&theme=radical&count_private=true)
 
 ## 🏆 GitHub Trophies
 ![](https://github-profile-trophy.vercel.app/?username=mayras22&theme=radical&no-frame=false&no-bg=false&margin-w=4)
