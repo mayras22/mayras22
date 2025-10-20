@@ -16,16 +16,21 @@ def get_repositories():
     url = f"https://api.github.com/user/repos?per_page=100&type=all"
     response = requests.get(url, headers=headers)
     response.raise_for_status()
-    return response.json()
+    repos = response.json()
+    
+    print(f"Found {len(repos)} repositories:")
+    for repo in repos:
+        print(f"  - {repo['full_name']} ({'private' if repo['private'] else 'public'})")
+    
+    return repos
 
 # Fetch language data for a repository
-def get_languages(repo_name):
-    repo_name_encoded = repo_name.replace(" ", "%20")  # Encode spaces in the repository name
-    url = f"https://api.github.com/repos/{USERNAME}/{repo_name_encoded}/languages"
-    print(f"Fetching languages for repository: {repo_name} (URL: {url})")  # Debugging
+def get_languages(repo_full_name):
+    url = f"https://api.github.com/repos/{repo_full_name}/languages"
+    print(f"Fetching languages for repository: {repo_full_name} (URL: {url})")  # Debugging
     response = requests.get(url, headers=headers)
     if response.status_code == 404:
-        print(f"Repository not found: {repo_name}")
+        print(f"Repository not found: {repo_full_name}")
     response.raise_for_status()
     return response.json()
 
@@ -35,13 +40,15 @@ def aggregate_languages():
     language_totals = {}
 
     for repo in repos:
+        repo_full_name = repo["full_name"]  # This includes owner/repo_name
         repo_name = repo["name"]
+        print(f"Processing repository: {repo_full_name}")  # Show which repos are being processed
         try:
-            languages = get_languages(repo_name)
+            languages = get_languages(repo_full_name)
             for lang, bytes_used in languages.items():
                 language_totals[lang] = language_totals.get(lang, 0) + bytes_used
         except requests.exceptions.HTTPError as e:
-            print(f"Error fetching languages for {repo_name}: {e}")  # Log the error and continue
+            print(f"Error fetching languages for {repo_full_name}: {e}")  # Log the error and continue
             continue
 
     return language_totals

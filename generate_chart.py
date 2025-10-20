@@ -27,7 +27,7 @@ for i, (bar, percentage) in enumerate(zip(bars, percentages)):
 
 # Customize the chart
 plt.xlabel('Percentage (%)', color='white', fontsize=12)
-plt.title('Programming Language Usage', color='white', fontsize=16, fontweight='bold', pad=20)
+plt.title('Programming Languages Used Across Public and Private Repositories', color='white', fontsize=16, fontweight='bold', pad=20)
 plt.gca().set_facecolor('#2E3440')
 plt.gcf().patch.set_facecolor('#2E3440')
 
