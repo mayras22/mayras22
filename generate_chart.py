@@ -5,37 +5,44 @@ import matplotlib.pyplot as plt
 with open("language_data.json", "r") as f:
     data = json.load(f)
 
-# Prepare data for plotting
-languages = list(data.keys())
-percentages = list(data.values())
+# Sort data by percentage (descending)
+sorted_data = sorted(data.items(), key=lambda x: x[1], reverse=True)
+languages = [item[0] for item in sorted_data]
+percentages = [item[1] for item in sorted_data]
 
-# Define colors for the chart
-colors = ["#8FBCBB", "#88C0D0", "#81A1C1", "#B48EAD", "#D08770"]  # Blue, purple, orange tones
+# Define colors for the chart (extended palette)
+colors = ["#8FBCBB", "#88C0D0", "#81A1C1", "#B48EAD", "#D08770", "#A3BE8C", "#EBCB8B", "#BF616A"]
 
-# Create a pie chart
-plt.figure(figsize=(6, 6))
-wedges, texts, autotexts = plt.pie(
-    percentages,
-    labels=languages,
-    autopct="%1.1f%%",
-    startangle=140,
-    colors=colors,
-    textprops={"color": "white", "fontsize": 10}  # Ensure text is visible
-)
+# Create a horizontal bar chart
+plt.figure(figsize=(10, 6))
+plt.style.use('dark_background')
 
-# Adjust label positions to avoid overlap
-for text in texts:
-    text.set_color("white")  # Set label color to white for visibility
-    text.set_fontsize(10)    # Increase font size for better readability
+bars = plt.barh(languages, percentages, color=colors[:len(languages)])
 
-# Add a circle at the center to make it a donut chart
-centre_circle = plt.Circle((0, 0), 0.70, fc="#2E3440")  # Dark background
-fig = plt.gcf()
-fig.gca().add_artist(centre_circle)
+# Add percentage labels on the bars
+for i, (bar, percentage) in enumerate(zip(bars, percentages)):
+    plt.text(bar.get_width() + 0.5, bar.get_y() + bar.get_height()/2, 
+             f'{percentage:.1f}%', 
+             va='center', ha='left', color='white', fontweight='bold')
 
-# Add a title
-plt.title("Programming Language Usage", color="white", fontsize=14)
+# Customize the chart
+plt.xlabel('Percentage (%)', color='white', fontsize=12)
+plt.title('Programming Language Usage', color='white', fontsize=16, fontweight='bold', pad=20)
+plt.gca().set_facecolor('#2E3440')
+plt.gcf().patch.set_facecolor('#2E3440')
+
+# Remove top and right spines
+plt.gca().spines['top'].set_visible(False)
+plt.gca().spines['right'].set_visible(False)
+plt.gca().spines['left'].set_color('white')
+plt.gca().spines['bottom'].set_color('white')
+
+# Set tick colors
+plt.gca().tick_params(colors='white')
+
+# Adjust layout to prevent label cutoff
+plt.tight_layout()
 
 # Save the chart as an image
-plt.savefig("language_usage_chart.png", dpi=150, facecolor="#2E3440")  # Match background color
+plt.savefig("language_usage_chart.png", dpi=150, facecolor="#2E3440", bbox_inches='tight')
 plt.show()
