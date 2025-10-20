@@ -11,18 +11,40 @@ headers = {
     "Authorization": f"token {GITHUB_TOKEN}"
 }
 
-# Fetch all repositories (including private and forked)
+# Fetch all repositories (including private, forked, and collaborator repos)
 def get_repositories():
-    url = f"https://api.github.com/user/repos?per_page=100&type=all"
-    response = requests.get(url, headers=headers)
-    response.raise_for_status()
-    repos = response.json()
+    all_repos = []
     
-    print(f"Found {len(repos)} repositories:")
-    for repo in repos:
-        print(f"  - {repo['full_name']} ({'private' if repo['private'] else 'public'})")
+    # Get repositories you own or are a member of
+    url1 = f"https://api.github.com/user/repos?per_page=100&type=all"
+    response1 = requests.get(url1, headers=headers)
+    response1.raise_for_status()
+    owned_repos = response1.json()
+    all_repos.extend(owned_repos)
     
-    return repos
+    # Get repositories where you're a collaborator
+    url2 = f"https://api.github.com/user/repos?per_page=100&affiliation=collaborator"
+    response2 = requests.get(url2, headers=headers)
+    if response2.status_code == 200:
+        collaborator_repos = response2.json()
+        all_repos.extend(collaborator_repos)
+    
+    # Remove duplicates (in case a repo appears in both lists)
+    unique_repos = {}
+    for repo in all_repos:
+        unique_repos[repo['id']] = repo
+    
+    final_repos = list(unique_repos.values())
+    
+    print(f"Found {len(final_repos)} total repositories:")
+    print(f"  - Owned/Member repos: {len(owned_repos)}")
+    print(f"  - Collaborator repos: {len(collaborator_repos) if response2.status_code == 200 else 0}")
+    
+    for repo in final_repos:
+        owner_type = "YOU" if repo['owner']['login'] == USERNAME else repo['owner']['login']
+        print(f"  - {repo['full_name']} ({'private' if repo['private'] else 'public'}) [Owner: {owner_type}]")
+    
+    return final_repos
 
 # Fetch language data for a repository
 def get_languages(repo_full_name):
@@ -66,12 +88,14 @@ def save_to_file(data, filename="language_data.json"):
 # Main function
 if __name__ == "__main__":
     language_totals = aggregate_languages()
-    #print("Aggregated Language Data:", language_totals)  # Print aggregated data for debugging
+    
+    print("\n=== AGGREGATED LANGUAGE DATA ===")
+    total_bytes = sum(language_totals.values())
+    for lang, bytes_used in sorted(language_totals.items(), key=lambda x: x[1], reverse=True):
+        percentage = (bytes_used / total_bytes) * 100
+        print(f"{lang}: {bytes_used:,} bytes ({percentage:.1f}%)")
 
     percentages = calculate_percentages(language_totals)
-    #print("Language Usage Percentages:")  # Print percentages for debugging
-    #for lang, percent in percentages.items():
-        #print(f"{lang}: {percent:.2f}%")
-
     save_to_file(percentages)
-    print("Language usage data saved to language_data.json")
+    print(f"\nLanguage usage data saved to language_data.json")
+    print(f"Total code analyzed: {total_bytes:,} bytes across {len(language_totals)} languages")
