@@ -6,6 +6,8 @@
 ![Language Usage](language_usage_chart.png)
 ### Language Usage
 ![Language Usage](language_usage_chart.png)
+### Language Usage
+![Language Usage](language_usage_chart.png)
 
 <div id="header" align="center"><div id="header" align="center">
   <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2ZqM2N2MjRjcnptZ2NhcWRkYjE5ZXhqbjZ5Zmk2b3dvY3J1NXF5eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Fgvl4kpB8mTRLmciii/giphy.gif" width="400"/>
