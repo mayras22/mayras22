@@ -2,6 +2,8 @@
 ![Language Usage](language_usage_chart.png)
 ### Language Usage
 ![Language Usage](language_usage_chart.png)
+### Language Usage
+![Language Usage](language_usage_chart.png)
 
 
 <div id="header" align="center"><div id="header" align="center">
